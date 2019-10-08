@@ -1,19 +1,44 @@
 import React, { useState } from 'react';
 
-import { Modal } from './modal/Modal';
+import { PAGES } from '../constants';
+import { LandingPage } from '../pages/landing';
+import { AllJokesPage } from '../pages/allJokes';
+import { MyFavoritesPage } from '../pages/myFavorites';
+import { RandomJokePage } from '../pages/randomJoke';
+import { NotFoundPage } from '../pages/notFound';
 
-let ard = 'vark';
+const renderPage = (page: PAGES) => {
+  switch (page) {
+    case PAGES.LANDING:
+      return <LandingPage />;
+    case PAGES.ALLJOKES:
+      return <AllJokesPage />;
+    case PAGES.FAVORITEJOKES:
+      return <MyFavoritesPage />;
+    case PAGES.RANDOMJOKE:
+      return <RandomJokePage />;
+    default:
+      return <NotFoundPage />;
+  }
+};
 
 export const App = (config: any) => {
-  const [modalOpen, setModalOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(PAGES.LANDING);
 
   return (
     <React.Fragment>
-      <h1>App Title should go here</h1>
+      <h1>Chuck Norris Jokes</h1>
+      <p>Select a page: </p>
+      <select onChange={event => setCurrentPage(event.target.value as PAGES)}>
+        <option value={PAGES.LANDING}>Landing</option>
+        <option value={PAGES.ALLJOKES}>All Jokes</option>
+        <option value={PAGES.FAVORITEJOKES}>My Favorites</option>
+        <option value={PAGES.RANDOMJOKE}>Random Joke</option>
+      </select>
 
-      <button onClick={() => setModalOpen(!modalOpen)}>Toggle Modal</button>
+      <hr />
 
-      <Modal open={modalOpen} />
+      {renderPage(currentPage)}
     </React.Fragment>
   );
 };
