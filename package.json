@@ -10,7 +10,8 @@
     "clean:dist": "rm -rf dist/*",
     "cp:public": "cp ./public/index.html dist/",
     "start": "yarn run build:webpack-config && webpack-dev-server --open",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "lint": "tslint -p tsconfig.json -c tslint.json"
   },
   "keywords": [],
   "author": "",
@@ -38,7 +39,9 @@
     "redux-devtools-extension": "^2.13.8",
     "source-map-loader": "^0.2.4",
     "style-loader": "^1.0.0",
+    "ts-jest": "^24.1.0",
     "ts-loader": "^6.2.0",
+    "tslint": "^5.20.0",
     "typescript": "^3.6.3",
     "uglifyjs-webpack-plugin": "^2.2.0",
     "webpack": "^4.41.0",
