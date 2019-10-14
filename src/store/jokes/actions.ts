@@ -1,11 +1,11 @@
-import { _mockJokes } from '../../constants';
+import { mockJokes } from '../../constants';
 import { IJoke } from '../../types';
 import { Actions, TJokesActions } from './types';
 
 export function fetchJokes(): TJokesActions {
   return {
     type: Actions.GET_JOKES,
-    jokes: _mockJokes.map(joke => joke.id),
+    jokes: mockJokes.map(joke => joke.id),
   };
 }
 

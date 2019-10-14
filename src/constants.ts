@@ -8,7 +8,7 @@ export enum Pages {
   NOTFOUND = 'NOTFOUND',
 }
 
-export const _mockJokes: IJoke[] = [
+export const mockJokes: IJoke[] = [
   {
     id: 1,
     joke: 'Chuck Norris uses ribbed condoms inside out, so he gets the pleasure.',
@@ -76,8 +76,7 @@ export const _mockJokes: IJoke[] = [
   },
   {
     id: 19,
-    joke:
-      'In an average living room there are 1,242 objects Chuck Norris could use to kill you, including the room itself.',
+    joke: `In an average living room there are 1,242 objects Chuck Norris could use to kill you, including the room itself.`,
     categories: [],
   },
   {
