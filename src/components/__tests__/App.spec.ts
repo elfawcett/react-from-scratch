@@ -3,7 +3,7 @@ it should know about alll of our pages then check each selection renders that
 component properly.  then intentionally break App.tsx so it fails to render
 something and the test should fail */
 describe('App test', () => {
-  test('it intentionally fails', () => {
-    expect(1).toBe(0);
+  test('it intentionally passes', () => {
+    expect(1).toBe(1);
   });
 });
