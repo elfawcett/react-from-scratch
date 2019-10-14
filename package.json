@@ -9,7 +9,7 @@
     "build:dev": "webpack --mode development",
     "clean:dist": "rm -rf dist/*",
     "cp:public": "cp ./public/index.html dist/",
-    "start": "yarn run build:webpack-config && webpack-dev-server --open",
+    "start": "yarn run build:webpack-config && webpack-dev-server",
     "test": "jest",
     "lint": "tslint -p tsconfig.json -c tslint.json"
   },
@@ -23,20 +23,28 @@
     "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
+    "@types/enzyme": "^3.10.3",
+    "@types/enzyme-adapter-react-16": "^1.0.5",
+    "@types/enzyme-to-json": "^1.5.3",
     "@types/html-webpack-plugin": "^3.2.1",
     "@types/jest": "^24.0.18",
     "@types/react": "^16.9.4",
     "@types/react-dom": "^16.9.1",
     "@types/react-redux": "^7.1.4",
+    "@types/redux-mock-store": "^1.0.1",
     "@types/redux-thunk": "^2.1.0",
     "@types/webpack": "^4.39.2",
     "@types/webpack-dev-server": "^3.1.7",
     "css-loader": "^3.2.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.15.1",
+    "enzyme-to-json": "^3.4.2",
     "html-webpack-plugin": "^3.2.0",
     "jest": "^24.9.0",
     "mini-css-extract-plugin": "^0.8.0",
     "prettier": "^1.18.2",
     "redux-devtools-extension": "^2.13.8",
+    "redux-mock-store": "^1.5.3",
     "source-map-loader": "^0.2.4",
     "style-loader": "^1.0.0",
     "ts-jest": "^24.1.0",
@@ -47,5 +55,26 @@
     "webpack": "^4.41.0",
     "webpack-cli": "^3.3.9",
     "webpack-dev-server": "^3.8.2"
+  },
+  "jest": {
+    "testEnvironment": "jsdom",
+    "roots": [
+      "<rootDir>/src"
+    ],
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/src/__tests__/setupEnzyme.ts"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/src/__tests__/setupEnzyme.ts",
+      "<rootDir>/src/__tests__/utils.tsx"
+    ]
   }
 }
