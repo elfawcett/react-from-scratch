@@ -1,15 +1,16 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { createStore, combineReducers, applyMiddleware, DeepPartial } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 import { systemReducer } from './system/reducers';
 import { jokesReducer } from './jokes/reducers';
+import { ICombinedState } from '../types';
 
 const rootReducer = combineReducers({
   system: systemReducer,
   jokes: jokesReducer,
 });
 
-function configureStore(preloadedState?: any) {
+function configureStore(preloadedState?: DeepPartial<ICombinedState>) {
   const middleware: any[] = [];
   const middlewareEnhancer = applyMiddleware(...middleware);
 
