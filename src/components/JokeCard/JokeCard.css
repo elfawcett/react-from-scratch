@@ -1,0 +1,57 @@
+.JokeCard {
+  display: flex;
+  flex-wrap: wrap;
+  width: calc(80vw / 3);
+  border: solid 1px rgb(72, 132, 134);
+  background-color: cadetblue;
+  align-content: space-between;
+  font-family: sans-serif;
+  color: white;
+  border-radius: 4px;
+  padding: 0.5em;
+  margin-bottom: 1em;
+}
+
+.JokeCard button {
+  border-radius: 4px;
+  background-color: white;
+  border-style: solid;
+  border-color: rgb(72, 132, 134);
+  border-width: 1px;
+}
+
+.JokeCard button:hover {
+  cursor: pointer;
+  background-color: rgb(240, 240, 240);
+}
+
+.JokeCard button:disabled {
+  cursor: not-allowed;
+}
+
+.JokeCard button.remove {
+  color: crimson;
+}
+
+.JokeCard button.add {
+  color: seagreen;
+}
+
+.JokeCard .header {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.JokeCard .body {
+  width: 100%;
+  margin: 0.5em 0;
+  font-size: 1.3em;
+}
+
+.JokeCard .footer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

@@ -1,17 +1,21 @@
 import { createStore, combineReducers, applyMiddleware, DeepPartial } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import thunk from 'redux-thunk';
 
 import { systemReducer } from './system/reducers';
 import { jokesReducer } from './jokes/reducers';
-import { ICombinedState } from '../types';
+import { favoritesReducer } from './favorites/reducers';
 
 const rootReducer = combineReducers({
   system: systemReducer,
   jokes: jokesReducer,
+  favorites: favoritesReducer,
 });
 
-function configureStore(preloadedState?: DeepPartial<ICombinedState>) {
-  const middleware: any[] = [];
+export type TAppState = ReturnType<typeof rootReducer>;
+
+function configureStore(preloadedState?: DeepPartial<TAppState>) {
+  const middleware: any[] = [thunk];
   const middlewareEnhancer = applyMiddleware(...middleware);
 
   const enhancers: any[] = [middlewareEnhancer];
