@@ -12,7 +12,8 @@
     "start": "yarn run build:webpack-config && webpack-dev-server",
     "test": "jest",
     "lint": "tslint -p tsconfig.json -c tslint.json",
-    "prettier": "prettier --check --config ./.prettierrc ./src/**/*"
+    "prettier": "prettier --check --config ./.prettierrc ./src/**/*",
+    "typecheck": "tsc --noEmit"
   },
   "keywords": [],
   "author": "",

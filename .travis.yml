@@ -4,6 +4,7 @@ node_js:
 script:
   - npm run prettier
   - npm run lint
+  - npm run typecheck
   - npm run test
 branches:
   only:
