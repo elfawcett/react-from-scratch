@@ -2,6 +2,7 @@ import { Pages } from '../../constants';
 import { ISystemState, Actions, TSystemActions } from './types';
 
 const initialState: ISystemState = {
+  shouldRefetchJokes: true,
   currentPage: Pages.LANDING,
 };
 

@@ -1,0 +1,13 @@
+body {
+  font-family: sans-serif;
+  background-color: palegreen;
+  color: midnightblue;
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  width: 90vw;
+  margin-left: auto;
+  margin-right: auto;
+}

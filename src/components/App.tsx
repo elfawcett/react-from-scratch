@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { getCurrentPage } from '../store/system/selectors';
+import { selectCurrentPage } from '../store/system/selectors';
 import { setCurrentPage } from '../store/system/actions';
 
 import { Pages } from '../constants';
@@ -10,6 +10,8 @@ import { AllJokesPage } from '../pages/allJokes';
 import { MyFavoritesPage } from '../pages/myFavorites';
 import { RandomJokePage } from '../pages/randomJoke';
 import { NotFoundPage } from '../pages/notFound';
+
+import './App.css';
 
 const renderPage = (page: Pages) => {
   switch (page) {
@@ -27,27 +29,37 @@ const renderPage = (page: Pages) => {
 };
 
 export const App: React.FC = () => {
-  const currentPage = useSelector(getCurrentPage);
   const dispatch = useDispatch();
+  const currentPage = useSelector(selectCurrentPage);
 
   return (
-    <React.Fragment>
+    <div className="App">
       <h1>Chuck Norris Jokes</h1>
-      <p>Select a page: </p>
-      {currentPage === Pages.NOTFOUND ? (
-        <button onClick={() => dispatch(setCurrentPage(Pages.LANDING))}>Go Home</button>
-      ) : (
-        <select onChange={event => dispatch(setCurrentPage(event.target.value as Pages))}>
-          <option value={Pages.LANDING}>Landing</option>
-          <option value={Pages.ALLJOKES}>All Jokes</option>
-          <option value={Pages.FAVORITEJOKES}>My Favorites</option>
-          <option value={Pages.RANDOMJOKE}>Random Joke</option>
-        </select>
-      )}
 
-      <hr />
+      <div
+        className="Navigator"
+        style={{
+          paddingBottom: '1em',
+          borderBottom: 'solid 1px midnightblue',
+        }}
+      >
+        <p>Select a page: </p>
+        {currentPage === Pages.NOTFOUND ? (
+          <button onClick={() => dispatch(setCurrentPage(Pages.LANDING))}>Go Home</button>
+        ) : (
+          <select
+            value={currentPage}
+            onChange={event => dispatch(setCurrentPage(event.target.value as Pages))}
+          >
+            <option value={Pages.LANDING}>Landing</option>
+            <option value={Pages.ALLJOKES}>All Jokes</option>
+            <option value={Pages.FAVORITEJOKES}>My Favorites</option>
+            <option value={Pages.RANDOMJOKE}>Random Joke</option>
+          </select>
+        )}
+      </div>
 
       {renderPage(currentPage)}
-    </React.Fragment>
+    </div>
   );
 };

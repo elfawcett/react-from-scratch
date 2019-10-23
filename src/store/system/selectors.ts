@@ -1,9 +1,13 @@
-import { ICombinedState } from '../../types';
+import { TAppState } from '../../store';
 
-export function getCurrentPage(state: ICombinedState) {
+export function selectCurrentPage(state: TAppState) {
   return state.system.currentPage;
 }
 
-export function getLastViewedJoke(state: ICombinedState) {
+export function selectLastViewedJoke(state: TAppState) {
   return state.system.lastViewedJoke;
+}
+
+export function selectShouldRefetchJokes(state: TAppState) {
+  return state.system.shouldRefetchJokes;
 }

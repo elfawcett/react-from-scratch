@@ -1,24 +1,92 @@
-import { mockJokes } from '../../constants';
-import { IJoke } from '../../types';
-import { Actions, TJokesActions } from './types';
+import { ThunkAction } from 'redux-thunk';
 
-export function fetchJokes(): TJokesActions {
+import { Requester } from '../../lib/Requester';
+import { Actions, TJokesActions } from './types';
+import { IJoke, TThunkResult } from '../../types';
+
+const requestClient = new Requester();
+
+/* Request-related action creators, only get dispatched by thunks */
+function getJokeRequesting(): TJokesActions {
+  return {
+    type: Actions.GET_JOKE_REQUESTING,
+    requesting: true,
+  };
+}
+
+function getJokeFailure(err: any): TJokesActions {
+  return {
+    type: Actions.GET_JOKE_FAILURE,
+    requesting: false,
+    err,
+  };
+}
+
+function getJokeSuccess(joke: IJoke): TJokesActions {
+  return {
+    type: Actions.GET_JOKE,
+    requesting: false,
+    joke,
+  };
+}
+
+export function getJoke(id: number): TThunkResult<Promise<IJoke>> {
+  return async dispatch => {
+    let joke;
+
+    dispatch(getJokeRequesting());
+
+    try {
+      joke = await requestClient.getJoke(id);
+      dispatch(getJokeSuccess(joke));
+    } catch (err) {
+      dispatch(getJokeFailure(err));
+      return err;
+    }
+
+    return joke;
+  };
+}
+
+/* Request-related action creators, only get dispatched by thunks */
+/* Extract these into requestActionFactory */
+function getJokesRequesting(): TJokesActions {
+  return {
+    type: Actions.GET_JOKES_REQUESTING,
+    requesting: true,
+  };
+}
+
+function getJokesFailure(err: any): TJokesActions {
+  return {
+    type: Actions.GET_JOKES_FAILURE,
+    requesting: false,
+    err,
+  };
+}
+
+function getJokesSuccess(jokes: IJoke[]): TJokesActions {
   return {
     type: Actions.GET_JOKES,
-    jokes: mockJokes.map(joke => joke.id),
+    requesting: false,
+    jokes,
   };
 }
 
-export function addToFavorites(id: IJoke['id']): TJokesActions {
-  return {
-    type: Actions.ADD_TO_FAVORITES,
-    id,
-  };
-}
+export function getJokes(): TThunkResult<Promise<IJoke[]>> {
+  return async dispatch => {
+    let jokes;
 
-export function removeFromFavorites(id: IJoke['id']): TJokesActions {
-  return {
-    type: Actions.REMOVE_FROM_FAVORITES,
-    id,
+    dispatch(getJokesRequesting());
+
+    try {
+      jokes = await requestClient.getJokes();
+      dispatch(getJokesSuccess(jokes));
+    } catch (err) {
+      dispatch(getJokesFailure(err));
+      return err;
+    }
+
+    return jokes;
   };
 }

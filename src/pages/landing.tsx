@@ -1,10 +1,10 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import { getLastViewedJoke } from '../store/system/selectors';
+import { selectLastViewedJoke } from '../store/system/selectors';
 
 const LandingPage: React.FC = () => {
-  const lastViewedJoke = useSelector(getLastViewedJoke);
+  const lastViewedJoke = useSelector(selectLastViewedJoke);
 
   return (
     <div className="LandingPage">

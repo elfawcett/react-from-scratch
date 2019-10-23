@@ -1,38 +1,39 @@
-import { IJoke } from '../../types';
+import { IRequestAction, IJoke } from '../../types';
 
+/* All action constants */
 export enum Actions {
+  GET_JOKE = 'GET_JOKE',
+  GET_JOKE_REQUESTING = 'GET_JOKE_REQUESTING',
+  GET_JOKE_FAILURE = 'GET_JOKE_FAILURE',
+
   GET_JOKES = 'GET_JOKES',
-  // JOKES_REQUEST = 'JOKES_REQUEST',
-  // JOKES_SUCCESS = 'JOKES_SUCCESS',
-  // JOKES_FAILURE = 'JOKES_FAILURE',
-
-  ADD_TO_FAVORITES = 'ADD_TO_FAVORITES',
-  REMOVE_FROM_FAVORITES = 'REMOVE_FROM_FAVORITES',
+  GET_JOKES_REQUESTING = 'GET_JOKES_REQUESTING',
+  GET_JOKES_FAILURE = 'GET_JOKES_FAILURE',
 }
 
-interface IGetJokesAction {
-  type: typeof Actions.GET_JOKES;
-  /* jokes should be an array of joke IDs that results from some side effect that
-  async GETs the jokes or retrieves jokes from cache or something */
-  jokes: Array<IJoke['id']>;
+/* Joke actions */
+interface IGetJokeAction extends IRequestAction<Actions.GET_JOKE> {
+  joke: IJoke;
 }
 
-interface IAddToFavoritesAction {
-  type: typeof Actions.ADD_TO_FAVORITES;
-  id: IJoke['id'];
+interface IGetJokeRequestingAction extends IRequestAction<Actions.GET_JOKE_REQUESTING> {}
+interface IGetJokeFailureAction extends IRequestAction<Actions.GET_JOKE_FAILURE> {}
+
+type TGetJokeActions = IGetJokeAction | IGetJokeRequestingAction | IGetJokeFailureAction;
+
+/* Jokes actions */
+interface IGetJokesAction extends IRequestAction<Actions.GET_JOKES> {
+  jokes: IJoke[];
 }
 
-interface IRemoveFromFavoritesAction {
-  type: typeof Actions.REMOVE_FROM_FAVORITES;
-  id: IJoke['id'];
-}
+interface IGetJokesRequestingAction extends IRequestAction<Actions.GET_JOKES_REQUESTING> {}
+interface IGetJokesFailureAction extends IRequestAction<Actions.GET_JOKES_FAILURE> {}
 
-export type TJokesActions = IGetJokesAction | IAddToFavoritesAction | IRemoveFromFavoritesAction;
+type TGetJokesActions = IGetJokesAction | IGetJokesRequestingAction | IGetJokesFailureAction;
 
+/* Actions and State */
+export type TJokesActions = TGetJokeActions | TGetJokesActions;
 export interface IJokesState {
-  jokes: Array<IJoke['id']>;
-  jokesById: {
-    [id: string]: IJoke;
-  };
-  favorites: Array<IJoke['id']>;
+  jokes: IJoke[];
+  isRequesting: boolean;
 }
