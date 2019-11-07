@@ -1,7 +1,7 @@
 {
   "name": "app-from-scratch",
   "version": "1.0.0",
-  "description": "",
+  "description": "A practice repo for many things",
   "private": true,
   "scripts": {
     "build:webpack-config": "tsc src/webpack.config.ts --module commonjs && mv src/webpack.config.js ./",
