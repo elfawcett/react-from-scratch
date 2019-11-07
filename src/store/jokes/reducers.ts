@@ -14,6 +14,7 @@ function jokesReducer(state = initialState, action: TJokesActions): IJokesState 
       return {
         ...state,
         isRequesting: action.requesting,
+        err: action.err,
       };
 
     case Actions.GET_JOKE:

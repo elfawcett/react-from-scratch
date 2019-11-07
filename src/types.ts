@@ -12,7 +12,7 @@ import { TFavoritesActions } from './store/favorites/types';
 export interface IRequestAction<T = AnyAction> {
   type: T;
   requesting: boolean;
-  err?: any;
+  err?: Error;
 }
 
 export type TCombinedActions = TSystemActions | TJokesActions | TFavoritesActions;

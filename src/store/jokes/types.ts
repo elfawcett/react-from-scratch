@@ -36,4 +36,5 @@ export type TJokesActions = TGetJokeActions | TGetJokesActions;
 export interface IJokesState {
   jokes: IJoke[];
   isRequesting: boolean;
+  err?: Error;
 }

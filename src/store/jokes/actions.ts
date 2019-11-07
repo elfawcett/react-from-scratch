@@ -1,5 +1,3 @@
-import { ThunkAction } from 'redux-thunk';
-
 import { Requester } from '../../lib/Requester';
 import { Actions, TJokesActions } from './types';
 import { IJoke, TThunkResult } from '../../types';
